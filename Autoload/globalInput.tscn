@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmo5pcmedcyfx"]
+
+[ext_resource type="Script" path="res://Autoload/globalInput.gd" id="1_eavqm"]
+
+[node name="GlobalInput" type="Node"]
+script = ExtResource("1_eavqm")
+
+[node name="InputCooldownTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true

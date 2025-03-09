@@ -1,0 +1,186 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbvt2hya2kq00"]
+
+[ext_resource type="Script" path="res://Scenes/TileMap/tileMap.gd" id="1_56sl8"]
+[ext_resource type="PackedScene" uid="uid://carmcqfjd2y8v" path="res://Scenes/Tile/tile.tscn" id="1_a1stv"]
+
+[node name="TileMap" type="Node2D"]
+script = ExtResource("1_56sl8")
+
+[node name="ColumnsContainer" type="HBoxContainer" parent="."]
+offset_right = 1260.0
+offset_bottom = 700.0
+theme_override_constants/separation = 5
+
+[node name="Column" type="VBoxContainer" parent="ColumnsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Tile" parent="ColumnsContainer/Column" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile2" parent="ColumnsContainer/Column" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile3" parent="ColumnsContainer/Column" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile4" parent="ColumnsContainer/Column" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile5" parent="ColumnsContainer/Column" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Column2" type="VBoxContainer" parent="ColumnsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Tile" parent="ColumnsContainer/Column2" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile2" parent="ColumnsContainer/Column2" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile3" parent="ColumnsContainer/Column2" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile4" parent="ColumnsContainer/Column2" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile5" parent="ColumnsContainer/Column2" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Column3" type="VBoxContainer" parent="ColumnsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Tile" parent="ColumnsContainer/Column3" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile2" parent="ColumnsContainer/Column3" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile3" parent="ColumnsContainer/Column3" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile4" parent="ColumnsContainer/Column3" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile5" parent="ColumnsContainer/Column3" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Column4" type="VBoxContainer" parent="ColumnsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Tile" parent="ColumnsContainer/Column4" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile2" parent="ColumnsContainer/Column4" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile3" parent="ColumnsContainer/Column4" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile4" parent="ColumnsContainer/Column4" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile5" parent="ColumnsContainer/Column4" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Column5" type="VBoxContainer" parent="ColumnsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Tile" parent="ColumnsContainer/Column5" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile2" parent="ColumnsContainer/Column5" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile3" parent="ColumnsContainer/Column5" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile4" parent="ColumnsContainer/Column5" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile5" parent="ColumnsContainer/Column5" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Column6" type="VBoxContainer" parent="ColumnsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Tile" parent="ColumnsContainer/Column6" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile2" parent="ColumnsContainer/Column6" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile3" parent="ColumnsContainer/Column6" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile4" parent="ColumnsContainer/Column6" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile5" parent="ColumnsContainer/Column6" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Column7" type="VBoxContainer" parent="ColumnsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Tile" parent="ColumnsContainer/Column7" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile2" parent="ColumnsContainer/Column7" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile3" parent="ColumnsContainer/Column7" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile4" parent="ColumnsContainer/Column7" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile5" parent="ColumnsContainer/Column7" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Column8" type="VBoxContainer" parent="ColumnsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Tile" parent="ColumnsContainer/Column8" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile2" parent="ColumnsContainer/Column8" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile3" parent="ColumnsContainer/Column8" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile4" parent="ColumnsContainer/Column8" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile5" parent="ColumnsContainer/Column8" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Column9" type="VBoxContainer" parent="ColumnsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Tile" parent="ColumnsContainer/Column9" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile2" parent="ColumnsContainer/Column9" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile3" parent="ColumnsContainer/Column9" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile4" parent="ColumnsContainer/Column9" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[node name="Tile5" parent="ColumnsContainer/Column9" instance=ExtResource("1_a1stv")]
+layout_mode = 2
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]

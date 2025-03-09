@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://r5ubqtd75r4c"]
+
+[ext_resource type="Script" path="res://Scenes/Gun/gun.gd" id="1_vuf5y"]
+
+[node name="Gun" type="Control"]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 500.0
+offset_bottom = 200.0
+rotation = 1.5708
+script = ExtResource("1_vuf5y")
+
+[node name="GunTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="GunTexture"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="mouse_entered" from="GunTexture/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="GunTexture/Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="GunTexture/Button" to="." method="_on_button_pressed"]

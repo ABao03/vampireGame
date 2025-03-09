@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2au7ovnt6vgt"]
+
+[ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_u4whp"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_u4whp")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+scale = Vector2(0.765957, 0.795699)
+color = Color(0.87451, 0, 0, 1)
+polygon = PackedVector2Array(-3, -113, -67, 73, 74, 73)
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]

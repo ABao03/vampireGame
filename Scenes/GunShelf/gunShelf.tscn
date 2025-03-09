@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7i1d6xq23b5s"]
+
+[ext_resource type="Script" path="res://Scenes/GunShelf/gunShelf.gd" id="1_bpx0r"]
+[ext_resource type="PackedScene" uid="uid://r5ubqtd75r4c" path="res://Scenes/Gun/gun.tscn" id="2_su0ck"]
+
+[node name="GunShelf" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bpx0r")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 550.0
+offset_right = 1450.0
+offset_bottom = 200.0
+color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[node name="GunsContainer" type="VBoxContainer" parent="Background"]
+layout_mode = 1
+offset_left = 857.0
+offset_top = -250.0
+offset_right = 1357.0
+offset_bottom = 562.0
+rotation = 1.5708
+
+[node name="Gun" parent="Background/GunsContainer" instance=ExtResource("2_su0ck")]
+layout_mode = 2
+
+[node name="Gun2" parent="Background/GunsContainer" instance=ExtResource("2_su0ck")]
+layout_mode = 2
+
+[node name="Gun3" parent="Background/GunsContainer" instance=ExtResource("2_su0ck")]
+layout_mode = 2
+
+[node name="Gun4" parent="Background/GunsContainer" instance=ExtResource("2_su0ck")]
+layout_mode = 2

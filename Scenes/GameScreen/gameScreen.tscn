@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7nq843d1kw3d"]
+
+[ext_resource type="PackedScene" uid="uid://cbvt2hya2kq00" path="res://Scenes/TileMap/tileMap.tscn" id="1_ooqgb"]
+[ext_resource type="PackedScene" uid="uid://b2au7ovnt6vgt" path="res://Scenes/Player/player.tscn" id="2_fhbhr"]
+[ext_resource type="PackedScene" uid="uid://bejaehoxls0kq" path="res://Scenes/InfoSidebar/infoSidebar.tscn" id="3_tc064"]
+[ext_resource type="PackedScene" uid="uid://b7i1d6xq23b5s" path="res://Scenes/GunShelf/gunShelf.tscn" id="4_ft11b"]
+
+[node name="GameScreen" type="Node2D"]
+
+[node name="TileMap" parent="." instance=ExtResource("1_ooqgb")]
+position = Vector2(601, 329)
+
+[node name="Player" parent="." instance=ExtResource("2_fhbhr")]
+position = Vector2(670, 667)
+
+[node name="UI" type="Control" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InfoSidebar" parent="UI" instance=ExtResource("3_tc064")]
+layout_mode = 1
+
+[node name="GunShelf" parent="UI" instance=ExtResource("4_ft11b")]
+layout_mode = 1
+
+[editable path="TileMap"]
