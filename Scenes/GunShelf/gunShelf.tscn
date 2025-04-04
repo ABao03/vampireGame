@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b7i1d6xq23b5s"]
 
-[ext_resource type="Script" path="res://Scenes/GunShelf/gunShelf.gd" id="1_bpx0r"]
+[ext_resource type="Script" uid="uid://br0qsri1jtaq0" path="res://Scenes/GunShelf/gunShelf.gd" id="1_bpx0r"]
 [ext_resource type="PackedScene" uid="uid://r5ubqtd75r4c" path="res://Scenes/Gun/gun.tscn" id="2_su0ck"]
 
 [node name="GunShelf" type="Control"]
@@ -38,3 +38,20 @@ layout_mode = 2
 
 [node name="Gun4" parent="Background/GunsContainer" instance=ExtResource("2_su0ck")]
 layout_mode = 2
+
+[node name="ConfirmButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -345.0
+offset_top = 10.0
+offset_right = -95.0
+offset_bottom = 87.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 50
+text = "CONFIRM"
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
+[connection signal="pressed" from="ConfirmButton" to="." method="_on_confirm_button_pressed"]

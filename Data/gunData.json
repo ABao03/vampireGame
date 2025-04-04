@@ -2,13 +2,19 @@
   "0": {
 	"gunName": "Shotgun",
 	"gunClip": 2,
-	"gunTiles": [[0,0], [0,1], [0,-1]],
+	"bulletTiles": [[0,0], [0,1], [0,-1]],
+	"bulletTilesRepetitions": 0,
+	"playerMoveTiles": [[0,0], [1,0]],
+	"playerMoveTilesRepetitions": 10,
 	"gunDescription": "Fly forward until contact."
   },
   "1": {
 	"gunName": "Rifle",
 	"gunClip": 5,
-	"gunTiles": [[0,0], [0,1], [1,1], [2,1]],
+	"bulletTiles": [[0,0], [0,-1], [-1,-1], [-2,-1]],
+	"bulletTilesRepetitions": 1,
+	"playerMoveTiles": [[0,0], [0,1], [1,1], [2,1]],
+	"playerMoveTilesRepetitions": 0,
 	"gunDescription": "Move in a zig-zag pattern."
   }
 }

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://carmcqfjd2y8v"]
 
-[ext_resource type="Script" path="res://Scenes/Tile/tile.gd" id="1_lc0gh"]
+[ext_resource type="Script" uid="uid://bpc88n50gvse7" path="res://Scenes/Tile/tile.gd" id="1_lc0gh"]
 
 [node name="Tile" type="ColorRect"]
 custom_minimum_size = Vector2(136, 136)
@@ -8,7 +8,7 @@ offset_right = 48.0
 offset_bottom = 48.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-color = Color(0.787759, 0.787759, 0.787759, 1)
 script = ExtResource("1_lc0gh")
 
-[connection signal="resized" from="." to="." method="_on_resized"]
+[node name="TileAnchor" type="Marker2D" parent="."]
+position = Vector2(68, 68)

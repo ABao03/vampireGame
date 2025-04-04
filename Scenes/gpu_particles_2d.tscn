@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://cx3m48ls1ovdj"]
+
+[sub_resource type="Curve" id="Curve_y5ckk"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.254795, 349.946), 0.0, 0.0, 0, 0, Vector2(0.542466, -5.78162), 0.0, 0.0, 0, 0, Vector2(0.756164, 360), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_7muxf"]
+curve = SubResource("Curve_y5ckk")
+
+[sub_resource type="Curve" id="Curve_yddnh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_g8wx3"]
+curve = SubResource("Curve_yddnh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y5ckk"]
+lifetime_randomness = 0.8
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+initial_velocity_max = 290.0
+angular_velocity_min = -45.0
+angular_velocity_max = 45.0
+angular_velocity_curve = SubResource("CurveTexture_7muxf")
+gravity = Vector3(0, -98, 0)
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_g8wx3")
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+amount = 200
+lifetime = 0.4
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_y5ckk")

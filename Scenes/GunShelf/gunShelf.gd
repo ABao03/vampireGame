@@ -7,7 +7,7 @@ var gunsJsonData : Dictionary
 
 @onready var gunsContainer : VBoxContainer = $Background/GunsContainer
 
-
+#region INITIALIZE GUNS
 func _ready():
 	heldGunsIndexes = [0,1]
 	gunsJsonData = loadGunsJson()
@@ -18,11 +18,23 @@ func updateHeldGuns():
 	if heldGunsIndexes.size() > 4:
 		print("too many held guns")
 	else:
+		var currentGunChildIndex = 0
+		
 		for heldGunIndex in heldGunsIndexes:
 			var gunData : Dictionary = gunsJsonData[str(heldGunIndex)]
 			
-			for gun : Gun in gunsContainer.get_children():
-				gun.updateGun(gunData)
+			var gun : Gun = gunsContainer.get_child(currentGunChildIndex)
+			gun.updateGun(gunData)
+			
+			currentGunChildIndex += 1
+#endregion
+
+
+#region RESET GUNS
+func resetGuns():
+	for gun : Gun in gunsContainer.get_children():
+		gun.resetGun()
+#endregion
 
 
 #region LOAD CARD DATA JSON
@@ -33,4 +45,22 @@ func loadGunsJson() -> Dictionary:
 		jsonData = JSON.parse_string(fileString)
 	
 	return jsonData
+#endregion
+
+
+#region BUTTONS PRESSED
+# send signal to TileMap
+func _on_confirm_button_pressed() -> void:
+	GlobalSignal.movementConfirmButtonPressed.emit()
+	resetGuns()
+#endregion
+
+
+#region GLOBAL SIGNAL
+func _on_tree_entered() -> void:
+	pass
+
+
+func _on_tree_exited() -> void:
+	pass
 #endregion

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://r5ubqtd75r4c"]
 
-[ext_resource type="Script" path="res://Scenes/Gun/gun.gd" id="1_vuf5y"]
+[ext_resource type="Script" uid="uid://ct6a0upepmyx6" path="res://Scenes/Gun/gun.gd" id="1_vuf5y"]
 
 [node name="Gun" type="Control"]
 custom_minimum_size = Vector2(500, 200)

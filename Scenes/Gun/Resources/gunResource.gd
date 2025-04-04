@@ -3,5 +3,8 @@ extends Resource
 
 var gunName : String
 var gunClip : int
-var gunTiles : Array
+var bulletTiles : Array
+var bulletTilesRepetitions : int
+var playerMoveTiles : Array
+var playerMoveTilesRepetitions : int
 var gunDescription : String
