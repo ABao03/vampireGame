@@ -10,6 +10,8 @@ const EAST : Vector2 = Vector2(1,0)
 const WEST : Vector2 = Vector2(-1,0)
 const SOUTH : Vector2 = Vector2(0,-1)
 
+var gunSelected = false
+
 var bulletTilesOrigin: Vector2
 var bulletTilesOriginOrientation = WEST
 var bulletTilesArray: Array
@@ -23,6 +25,8 @@ var playerMoveTileRepetitions : int
 var playerMoveTilesPath: Array[Tile]
 var playerMovementConfirmed: bool = false
 var playerStopAnimationPlayed: bool = true
+
+var tilesContainingEnemies: Array[Vector2]
 
 var mapWidthIndex = 8
 var mapHeightIndex = 4
@@ -61,24 +65,28 @@ func setTileXAndYPositions():
 
 #region MOVE PLAYER 
 func _process(_delta: float) -> void:
-	if playerMoveTilesPath.is_empty() == false && playerMovementConfirmed:
+	if playerMoveTilesPath.is_empty() == false:
 		var moveTarget : Tile = playerMoveTilesPath[len(playerMoveTilesPath) - 1]
 		
 		var moveTargetAnchor = moveTarget.getAnchor()
 		var playerAnchor = player.getAnchor()
 		
-		player.movePlayerTowardsPosition(moveTargetAnchor.global_position)
-		
-		if playerStopAnimationPlayed == false && (moveTargetAnchor.global_position.round() - playerAnchor.global_position.round()).length() < 75:
-			playerStopAnimationPlayed = true
-			GlobalSignal.playerStoppedMotion.emit()
-		
-		if moveTargetAnchor.global_position.round() == playerAnchor.global_position.round():
-			playerPositionX = moveTarget.tilePositionX
-			playerPositionY = moveTarget.tilePositionY
-			playerMoveTilesPath.clear()
-			playerMovementConfirmed = false
-			# erase one specific tile if you want to move based on the grid
+		if playerMovementConfirmed:
+			player.movePlayerTowardsPosition(moveTargetAnchor.global_position)
+			
+			if playerStopAnimationPlayed == false && (moveTargetAnchor.global_position.round() - playerAnchor.global_position.round()).length() < 75:
+				playerStopAnimationPlayed = true
+				GlobalSignal.playerStoppedMotion.emit()
+			
+			if moveTargetAnchor.global_position.round() == playerAnchor.global_position.round():
+				playerPositionX = moveTarget.tilePositionX
+				playerPositionY = moveTarget.tilePositionY
+				playerMoveTilesPath.clear()
+				playerMovementConfirmed = false
+				GlobalSignal.enableMovementInput.emit()
+				# erase one specific tile if you want to move based on the grid
+		else:
+			player.setPlayerFacing(moveTargetAnchor)
 #endregion
 
 
@@ -86,13 +94,25 @@ func _process(_delta: float) -> void:
 # called from enemySpawner
 func spawnEnemyOnTile(xPosition: int, yPosition: int):
 	var spawnTile: Tile = getSpecificTile(xPosition, yPosition)
+	tilesContainingEnemies.append(Vector2(xPosition, yPosition))
+	
 	var spawnPosition: Vector2 = spawnTile.getAnchor().global_position
 	GlobalSignal.setEnemyPosition.emit(spawnPosition)
 #endregion
 
 
+#region CHECK IF ENEMY PRESENT
+func checkIfTileHasEnemy(xPosition: int, yPosition: int) -> bool:
+	if tilesContainingEnemies.has(Vector2(xPosition, yPosition)):
+		return true
+	else:
+		return false
+#endregion
+
+
 #region DRAW PATTERNS ON TILEMAP
 func drawGunTilesPattern(gunResource : GunResource):
+	gunSelected = true
 	clearGunTiles()
 	
 	createArrayOfTilesFromGunResource(gunResource)
@@ -159,7 +179,11 @@ func drawPlayerMoveTiles():
 				playerMoveTileXOffset = playerMoveTile[0] * -1
 				playerMoveTileYOffset = playerMoveTile[1]
 			
-			addTileToPlayerMoveTilesPath(playerMoveTilesOrigin.x + playerMoveTileXOffset, playerMoveTilesOrigin.y + playerMoveTileYOffset)
+			if checkIfTileHasEnemy(playerMoveTilesOrigin.x + playerMoveTileXOffset, playerMoveTilesOrigin.y + playerMoveTileYOffset) == true:
+				addTileToPlayerMoveTilesPath(playerMoveTilesOrigin.x + playerMoveTileXOffset, playerMoveTilesOrigin.y + playerMoveTileYOffset)
+				break
+			else:
+				addTileToPlayerMoveTilesPath(playerMoveTilesOrigin.x + playerMoveTileXOffset, playerMoveTilesOrigin.y + playerMoveTileYOffset)
 		
 		if playerMoveTileRepetitions != 0:
 			playerMoveTilesOrigin.x += playerMoveTileXOffset
@@ -225,6 +249,7 @@ func movePlayerUp():
 		playerPositionY -= 1
 		var moveTargetTile = getSpecificTile(playerPositionX, playerPositionY)
 		playerMoveTilesPath.append(moveTargetTile)
+		playerMovementConfirmed = true
 
 
 func movePlayerDown():
@@ -234,6 +259,7 @@ func movePlayerDown():
 		playerPositionY += 1
 		var moveTargetTile = getSpecificTile(playerPositionX, playerPositionY)
 		playerMoveTilesPath.append(moveTargetTile)
+		playerMovementConfirmed = true
 
 
 func movePlayerLeft():
@@ -243,6 +269,7 @@ func movePlayerLeft():
 		playerPositionX -= 1
 		var moveTargetTile = getSpecificTile(playerPositionX, playerPositionY)
 		playerMoveTilesPath.append(moveTargetTile)
+		playerMovementConfirmed = true
 
 
 func movePlayerRight():
@@ -252,59 +279,63 @@ func movePlayerRight():
 		playerPositionX += 1
 		var moveTargetTile = getSpecificTile(playerPositionX, playerPositionY)
 		playerMoveTilesPath.append(moveTargetTile)
+		playerMovementConfirmed = true
 
 
 func rotateOriginLeft():
-	if bulletTilesOriginOrientation == NORTH:
-		bulletTilesOriginOrientation = WEST
-	elif bulletTilesOriginOrientation == WEST:
-		bulletTilesOriginOrientation = SOUTH
-	elif bulletTilesOriginOrientation == SOUTH:
-		bulletTilesOriginOrientation = EAST
-	elif bulletTilesOriginOrientation == EAST:
-		bulletTilesOriginOrientation = NORTH
-	
-	if playerMoveTilesOriginOrientation == NORTH:
-		playerMoveTilesOriginOrientation = WEST
-	elif playerMoveTilesOriginOrientation == WEST:
-		playerMoveTilesOriginOrientation = SOUTH
-	elif playerMoveTilesOriginOrientation == SOUTH:
-		playerMoveTilesOriginOrientation = EAST
-	elif playerMoveTilesOriginOrientation == EAST:
-		playerMoveTilesOriginOrientation = NORTH
-	
-	clearGunTiles()
-	drawBulletTiles()
-	drawPlayerMoveTiles()
+	if gunSelected == true:
+		if bulletTilesOriginOrientation == NORTH:
+			bulletTilesOriginOrientation = WEST
+		elif bulletTilesOriginOrientation == WEST:
+			bulletTilesOriginOrientation = SOUTH
+		elif bulletTilesOriginOrientation == SOUTH:
+			bulletTilesOriginOrientation = EAST
+		elif bulletTilesOriginOrientation == EAST:
+			bulletTilesOriginOrientation = NORTH
+		
+		if playerMoveTilesOriginOrientation == NORTH:
+			playerMoveTilesOriginOrientation = WEST
+		elif playerMoveTilesOriginOrientation == WEST:
+			playerMoveTilesOriginOrientation = SOUTH
+		elif playerMoveTilesOriginOrientation == SOUTH:
+			playerMoveTilesOriginOrientation = EAST
+		elif playerMoveTilesOriginOrientation == EAST:
+			playerMoveTilesOriginOrientation = NORTH
+		
+		clearGunTiles()
+		drawBulletTiles()
+		drawPlayerMoveTiles()
 
 
 func rotateOriginRight():
-	if bulletTilesOriginOrientation == NORTH:
-		bulletTilesOriginOrientation = EAST
-	elif bulletTilesOriginOrientation == EAST:
-		bulletTilesOriginOrientation = SOUTH
-	elif bulletTilesOriginOrientation == SOUTH:
-		bulletTilesOriginOrientation = WEST
-	elif bulletTilesOriginOrientation == WEST:
-		bulletTilesOriginOrientation = NORTH
-	
-	if playerMoveTilesOriginOrientation == NORTH:
-		playerMoveTilesOriginOrientation = EAST
-	elif playerMoveTilesOriginOrientation == EAST:
-		playerMoveTilesOriginOrientation = SOUTH
-	elif playerMoveTilesOriginOrientation == SOUTH:
-		playerMoveTilesOriginOrientation = WEST
-	elif playerMoveTilesOriginOrientation == WEST:
-		playerMoveTilesOriginOrientation = NORTH
-	
-	clearGunTiles()
-	drawBulletTiles()
-	drawPlayerMoveTiles()
+	if gunSelected == true:
+		if bulletTilesOriginOrientation == NORTH:
+			bulletTilesOriginOrientation = EAST
+		elif bulletTilesOriginOrientation == EAST:
+			bulletTilesOriginOrientation = SOUTH
+		elif bulletTilesOriginOrientation == SOUTH:
+			bulletTilesOriginOrientation = WEST
+		elif bulletTilesOriginOrientation == WEST:
+			bulletTilesOriginOrientation = NORTH
+		
+		if playerMoveTilesOriginOrientation == NORTH:
+			playerMoveTilesOriginOrientation = EAST
+		elif playerMoveTilesOriginOrientation == EAST:
+			playerMoveTilesOriginOrientation = SOUTH
+		elif playerMoveTilesOriginOrientation == SOUTH:
+			playerMoveTilesOriginOrientation = WEST
+		elif playerMoveTilesOriginOrientation == WEST:
+			playerMoveTilesOriginOrientation = NORTH
+		
+		clearGunTiles()
+		drawBulletTiles()
+		drawPlayerMoveTiles()
 #endregion
 
 
 #region CONFIRM BUTTON SIGNAL
 func movementConfirmed():
+	gunSelected = false
 	clearGunTiles()
 
 

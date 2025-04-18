@@ -53,9 +53,9 @@ func _on_button_pressed() -> void:
 	if gunSelected == false:
 		gunSelected = true
 		GlobalSignal.gunSelected.emit(thisGunResource)
-		GlobalSignal.toggleMovementInput.emit()
+		GlobalSignal.disableMovementInput.emit()
 	else:
 		gunSelected = false
 		GlobalSignal.gunUnselected.emit()
-		GlobalSignal.toggleMovementInput.emit()
+		GlobalSignal.enableMovementInput.emit()
 #endregion

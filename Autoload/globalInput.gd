@@ -35,19 +35,22 @@ func _process(_delta: float) -> void:
 
 
 #region INPUT CONTROL
-func toggleMovementInput():
-	if movementInputPaused == false:
-		movementInputPaused = true
-	else:
-		movementInputPaused = false
+func enableMovementInput():
+	movementInputPaused = false
+
+
+func disableMovementInput():
+	movementInputPaused = true
 #endregion
 
 
 #region GLOBAL SIGNALS
 func _on_tree_entered() -> void:
-	GlobalSignal.toggleMovementInput.connect(toggleMovementInput)
+	GlobalSignal.enableMovementInput.connect(enableMovementInput)
+	GlobalSignal.disableMovementInput.connect(disableMovementInput)
 
 
 func _on_tree_exited() -> void:
-	GlobalSignal.toggleMovementInput.disconnect(toggleMovementInput)
+	GlobalSignal.enableMovementInput.connect(enableMovementInput)
+	GlobalSignal.disableMovementInput.connect(disableMovementInput)
 #endregion

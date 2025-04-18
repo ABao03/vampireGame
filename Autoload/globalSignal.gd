@@ -7,7 +7,8 @@ signal dKeyPressed
 signal qKeyPressed
 signal eKeyPressed
 
-signal toggleMovementInput # disables movement when gun selected
+signal enableMovementInput # enables/disables movement when gun selected
+signal disableMovementInput
 signal movementConfirmButtonPressed
 
 signal setPlayerPosition(position : Vector2)
@@ -35,7 +36,8 @@ func _ready():
 		qKeyPressed.emit()
 		eKeyPressed.emit()
 		
-		toggleMovementInput.emit()
+		enableMovementInput.emit()
+		disableMovementInput.emit()
 		movementConfirmButtonPressed.emit()
 		
 		setPlayerPosition.emit(Vector2.ZERO)

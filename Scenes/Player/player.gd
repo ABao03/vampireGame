@@ -16,9 +16,6 @@ func setPlayerPosition(targetPositionVector: Vector2):
 
 func movePlayerTowardsPosition(targetPositionVector: Vector2):
 	if animation.current_animation == "dash":
-		sprite.flip_h = false
-		sprite.look_at(targetPositionVector)
-		
 		var directionVector = (targetPositionVector - sprite.global_position).normalized()
 		playerFacingRight = directionVector.x >= 0
 	
@@ -51,10 +48,6 @@ func playerInMotion():
 
 
 func playerStopped():
-	if playerFacingRight == false:
-		sprite.flip_h = true
-	else:
-		sprite.flip_h = false
 	animation.play("exit")
 
 
@@ -63,6 +56,14 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		GlobalSignal.playerEnterAnimationEnded.emit()
 	if anim_name == "exit":
 		animation.play("idle")
+
+
+func setPlayerFacing(moveTargetAnchor : Marker2D):
+	var directionVector = (moveTargetAnchor.global_position - sprite.global_position).normalized()
+	if directionVector.x >= 0:
+		sprite.flip_h = false
+	else:
+		sprite.flip_h = true
 #endregion
 
 

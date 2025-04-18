@@ -13,6 +13,7 @@ position = Vector2(601, 329)
 
 [node name="Player" parent="." instance=ExtResource("2_fhbhr")]
 position = Vector2(670, 667)
+scale = Vector2(2.5, 2.5)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3_8p38c")]
 
